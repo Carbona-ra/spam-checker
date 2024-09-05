@@ -36,7 +36,7 @@ class SpamCheckerController extends AbstractController
 
 
 
-    #[Route('/checker2', name: 'api_check_email', methods: ['POST'])]
+    #[Route('/checker_domain', name: 'api_spam_checker_domain', methods: ['POST'])]
     public function check2(Request $request): JsonResponse
     {
         $data = $request->toArray();
@@ -50,8 +50,6 @@ class SpamCheckerController extends AbstractController
         {
             throw new UnprocessableEntityHttpException("L'email est incorect");
         }
-
-
         
         $email = $data['email'];
         $parts = explode("@", $email);
@@ -60,8 +58,6 @@ class SpamCheckerController extends AbstractController
         {
             return $this->json(['result' => 'spam']);
         }
-
-
         
         return $this->json(['result' => 'ok']);
     }
